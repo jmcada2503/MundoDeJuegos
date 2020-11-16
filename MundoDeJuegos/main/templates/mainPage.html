@@ -1,0 +1,321 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+{% load static %}
+
+<script>
+
+$(document).ready(function() {
+
+    //Variables
+    var sticky = false
+
+    //Mostrar avisos
+    var advices = $("#avisos").text().split("$end$")
+    for (var i=0; i<advices.length; i++) {
+        //Create the block
+        block = document.createElement("div")
+        $(block).css({
+            width: "100%",
+            position: "relative",
+            margin: "0px 0px 50px 0px"
+        })
+
+        //Create space
+        space = document.createElement("div")
+        space.className = "space"
+        $(space).css("height", "50px")
+        block.appendChild(space)
+
+        //Create textblock
+        textBlock = document.createElement("div")
+        textBlock.className = "textBlock"
+
+        text = document.createElement("p")
+        text.className = "textForBlock"
+        $(text).html(advices[i].split("$next$")[1])
+        textBlock.appendChild(text)
+        block.appendChild(textBlock)
+
+        //Create subtitle
+        subtitle = document.createElement("p")
+        subtitle.className = "subtitle"
+        $(subtitle).css({
+            position: "absolute",
+            left: "8%",
+            top: "0px",
+            color: "rgb(255, 121, 121)",
+            textShadow: "2px 2px 0px rgb(158, 44, 44)"
+        })
+        $(subtitle).text(advices[i].split("$next$")[0])
+        block.appendChild(subtitle)
+
+        $("#infoAvisos").append(block)
+    }
+
+    //Scroll del menu
+    setInterval(function() {
+        if ($(document).scrollTop() > 250) {
+            if (sticky == false) {
+                $(".menuCont").attr("class", "stickyMenu")
+                sticky = true
+            }
+        }
+        if ($(document).scrollTop() < 250) {
+            if (sticky == true) {
+                console.log("Arriba")
+                $(".stickyMenu").attr("class", "menuCont")
+                sticky = false
+            }
+        }
+    }, 100)
+
+    //Ubicacion
+    $("#ubicacion").on("click", function() {
+        $("html, body").animate({
+            scrollTop: $("#ubicacionSection").offset().top+$("#ubicacionSection").height()-window.innerHeight+100
+        }, 1000)
+        $("html, body").animate({
+            scrollTop: $("#ubicacionSection").offset().top-100
+        }, 2000)
+    })
+
+    //Boton de contacto
+    $("#contacto").on("click", function() {
+        $("html, body").animate({
+            scrollTop: $("#footer").closest("div").offset().top
+        }, 2000)
+    })
+
+    //Boton de quienes somos
+    $("#about").on("click", function() {
+        $("html, body").animate({
+            scrollTop: $("#principios").offset().top+$("#principios").height()-window.innerHeight+50
+        }, 1000)
+        $("html, body").animate({
+            scrollTop: $("#infoAboutUs").offset().top-100
+        }, 3000)
+    })
+
+    //Boton de inicio
+    $("#inicio").on("click", function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 1000)
+    })
+
+    //Boton de avisos
+    $("#avisosButton").on("click", function() {
+        console.log("Prueba")
+        $("html, body").animate({
+            scrollTop: $("#infoAvisos").offset().top+$("#infoAvisos").height()-window.innerHeight+50
+        }, 1000)
+        $("html, body").animate({
+            scrollTop: $("#infoAvisos").offset().top-100
+        }, 3000)
+    })
+
+    //Corregir grados
+    if ($(window).width()<1180) {
+        $($("#grados").find(".textBlock").toArray()[0]).html("<p class='textForBlock'><span style='color:rgb(0, 217, 255); text-shadow: 1px 1px 0px rgb(0, 119, 143);'>-></span> CAMINADORES (1 año)<br><br><span style='color:rgb(0, 217, 255); text-shadow: 1px 1px 0px rgb(0, 119, 143);'>-></span> PARVULOS (2 años)<br><br><span style='color:rgb(0, 217, 255); text-shadow: 1px 1px 0px rgb(0, 119, 143);'>-></span> PREJARDIN (3 años)<br><br><span style='color:rgb(0, 217, 255); text-shadow: 1px 1px 0px rgb(0, 119, 143);'>-></span> JARDIN (4 años)<br><br><span style='color:rgb(0, 217, 255); text-shadow: 1px 1px 0px rgb(0, 119, 143);'>-></span> TRANSICION (5 años)</p>")
+    }
+
+    //Corregir titulo
+    if ($(window).width()<1060) {
+        $($(".title").toArray()[0]).css({
+            fontSize: "55px"
+        })
+    }
+
+})
+
+</script>
+
+<style>
+
+body {
+    margin: 0px;
+    background-color: #fff;
+    background-image:
+    linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+    linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1.2em;
+    overflow-x: hidden;
+}
+
+/* Clases */
+.title {
+    font-size:60px;
+    font-family: 'Kalam', cursive;
+    margin: 0px;
+    color:rgb(0, 217, 255);
+    text-shadow: 2px 2px 0px rgb(0, 119, 143);
+}
+.subtitle {
+    font-size:50px;
+    font-family: 'Kalam', cursive;
+    margin: 0px;
+    color:rgb(94, 255, 201);
+    text-shadow: 2px 2px 0px rgb(25, 114, 84);
+}
+.textBlock {
+    position: relative;
+    background-color: white;
+    border: solid 0px white;
+    border-radius: 20px;
+    width: 90%;
+    margin: 0px 5%;
+    box-shadow: 0px 0px 10px rgb(190, 190, 190);
+}
+.space {
+    position: relative;
+    opacity: 0;
+}
+.textForBlock {
+    position: relative;
+    font-size: 30px;
+    font-family: 'Kalam', cursive;
+    color: rgb(107, 107, 107);
+    margin: 0px;
+    padding: 50px 30px;
+}
+
+#menuUltraCont {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    margin: 0px;
+}
+.variable {
+    position: fixed;
+    visibility: hidden;
+}
+#logo {
+    position: relative;
+    height: 230px;
+    width: 230px;
+    margin: 10px 0px 10px 5%;
+}
+
+</style>
+
+<html>
+
+<head>
+    <title>Mundo de Juegos</title>
+</head>
+
+<!-- Variables -->
+<p class="variable" id="avisos">{{avisos}}</p>
+
+<div style="height: 250px;">
+    <img src="{% static 'Img/logo.png' %}" id="logo">
+    <p class="title" style="position: absolute; width: 60%; text-align: center; right: 5%; top: 40px;">CENTRO EDUCATIVO MUNDO DE JUEGOS</p>
+</div>
+<div id="menuUltraCont">
+    {% include "menu.html" %}
+</div>
+
+<p class="title" style="position: relative; font-size: 40px; text-align: center; margin: 50px 5%;">"Creceré sano y feliz si me amas, proteges y acompañas"</p>
+
+<div style="width: 100%; position: relative; margin: 20px 0px 50px 0px; height: 500px;">
+    {% include "carrusel.html" %}
+</div>
+
+<section id="infoAvisos">
+    <p class="subtitle" style="font-size: 60px; margin: 0px 5%; text-align: center; color: rgb(255, 121, 121); text-shadow: 2px 2px 0px rgb(158, 44, 44);">Información importante</p>
+</section>
+
+<section id="infoAboutUs">
+<p class="subtitle" style="font-size: 60px; margin: 0px 5%; text-align: center;">Quiénes somos</p>
+
+<div style="width: 100%; position: relative; margin: 0px 0px 50px 0px;">
+    <div style="height: 50px;" class="space"></div>
+    <div class="textBlock" id="mision">
+        <p class="textForBlock">El Centro Educativo Mundo de Juegos es una institución que forma niños y niñas en su primera infancia, integrando la familia como núcleo fundamental para su desarrollo integral, fortaleciendo competencias desde el ser, el saber, el saber hacer, y el sentir, desde la lúdica, la música, la literatura y en el acompañamiento en la práctica de sanos hábitos de salud y nutrición.<br><br>La pedagogía estará basada en valores para hacer de los niños unos buenos seres humanos que trabajen en pro de la sana convivencia y la paz.</p>
+    </div>
+    <p class="subtitle" style="position: absolute; left: 8%; top: 0px;">Misión</p>
+</div>
+
+<div style="width: 100%; position: relative; margin: 50px 0px 50px 0px;">
+    <div style="height: 50px;" class="space"></div>
+    <div class="textBlock" id="vision">
+        <p class="textForBlock">Para los años 2017 al 2021, el Centro Educativo Mundo de Juegos será reconocido por la calidad en la formación de niños y niñas en su primera infancia desde sus diferentes dimensiones para que puedan interactuar de manera acertada con el medio y con las personas que lo rodean.</p>
+    </div>
+    <p class="subtitle" style="position: absolute; left: 8%; top: 0px;">Visión</p>
+</div>
+
+<div style="width: 100%; position: relative; margin: 50px 0px 50px 0px;">
+    <div style="height: 50px;" class="space"></div>
+    <div class="textBlock" id="principios">
+        <p class="subtitle" style="position: relative; padding: 50px 30px 0px 30px; font-size: 40px;">AMOR:</p>
+        <p class="textForBlock" style="padding: 0px 30px;">Es un sentimiento vivido en servicio a los otros, capaz de unirnos y de hacernos sensibles ante el dolor de quienes nos rodean.</p>
+        <p class="subtitle" style="position: relative; padding: 50px 30px 0px 30px; font-size: 40px;">RESPETO-TOLERANCIA:</p>
+        <p class="textForBlock" style="padding: 0px 30px;">Estos valores están unidos entre sí, pues el respeto implica reconocer la individualidad de cada persona y la tolerancia define el grado de aceptación de los demás, la práctica de estos valores permite construir un proyecto de vida más humano e incluyente.</p>
+        <p class="subtitle" style="position: relative; padding: 50px 30px 0px 30px; font-size: 40px;">ALEGRÍA:</p>
+        <p class="textForBlock" style="padding: 0px 30px;">Es un medio para encontrarle el sentido a la vida desde el juego, la música, el teatro, la literatura, acrecentándose las posibilidades para disfurar y celebrar la existencia en compañía del otro.</p>
+        <p class="subtitle" style="position: relative; padding: 50px 30px 0px 30px; font-size: 40px;">SOLIDARIDAD:</p>
+        <p class="textForBlock" style="padding: 0px 30px;">Implica cuidar y ayudar al otro sin esperar nada a cambio.</p>
+        <p class="subtitle" style="position: relative; padding: 50px 30px 0px 30px; font-size: 40px;">RESPONSABILIDAD:</p>
+        <p class="textForBlock" style="padding: 0px 30px 50px 30px;">Asumir los compromisos personales fortalece la buena marcha en cada gestión que se emprende, optimiza los resultados y crea un ambiente de superación continua.</p>
+    </div>
+    <p class="subtitle" style="position: absolute; left: 8%; top: 0px;">Principios</p>
+</div>
+</section>
+
+<section id="grados">
+
+    <p class="title" style="font-size: 60px; margin: 0px 5%; text-align: center;">Nuestros servicios</p>
+
+    <div style="width: 100%; position: relative; margin: 50px 0px 50px 0px;">
+        <div style="height: 50px;" class="space"></div>
+        <div class="textBlock">
+            <p class="textForBlock"><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> CAMINADORES&nbsp;&nbsp;&nbsp;&nbsp;- - - - - - - - - - - - - - - - - - - - - -&nbsp;&nbsp;&nbsp;&nbsp;(1 año)<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> PARVULOS&nbsp;&nbsp;&nbsp;&nbsp;- - - - - - - - - - - - - - - - - - - - - - - -&nbsp;&nbsp;&nbsp;&nbsp;(2 años)<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> PREJARDIN&nbsp;&nbsp;&nbsp;&nbsp;- - - - - - - - - - - - - - - - - - - - - - - &nbsp;&nbsp;&nbsp;&nbsp;(3 años)<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> JARDIN&nbsp;&nbsp;&nbsp;&nbsp;- - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;&nbsp;&nbsp;&nbsp;(4 años)<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> TRANSICION&nbsp;&nbsp;&nbsp;&nbsp;- - - - - - - - - - - - - - - - - - - - - - -&nbsp;&nbsp;&nbsp;&nbsp;(5 años)</p>
+        </div>
+        <p class="subtitle" style="position: absolute; left: 8%; top: 0px; color:rgb(0, 217, 255);
+        text-shadow: 2px 2px 0px rgb(0, 119, 143);">Grados</p>
+    </div>
+
+    <div style="width: 100%; position: relative; margin: 50px 0px 50px 0px;">
+        <div class="space" style="height: 50px;"></div>
+        <div class="textBlock">
+            <p class="textForBlock"><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> Clases de inglés y música a partir de caminadores<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> Expresión corporal para todos los grados<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> Actividad extracurricular: Teatro<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> Jornada complementaria con servicio de alimentación<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> Tenemos convenio con varias instituciones del municipio para que los niños continúen su formación en la básica primaria<br><br><span style="color:rgb(0, 217, 255);
+                text-shadow: 1px 1px 0px rgb(0, 119, 143);">-></span> Atención personalizada</p>
+        </div>
+        <p class="subtitle" style="position: absolute; left: 8%; top: 0px; color:rgb(0, 217, 255);
+        text-shadow: 2px 2px 0px rgb(0, 119, 143);">Actividades</p>
+    </div>
+
+</section>
+
+<section id="ubicacionSection">
+
+    <p class="title" style="font-size: 60px; margin: 0px 5%; text-align: center; color: rgb(242, 252, 105); text-shadow: 2px 2px 0px rgb(138, 146, 26);">Ubicación</p>
+
+<div style="width: 100%; position: relative; margin: 0px 0px 50px 0px;">
+    <p class="subtitle" style="position: absolute; left: 8%; color: rgb(242, 252, 105); text-shadow: 2px 2px 0px rgb(138, 146, 26);">Mapa</p>
+    <iframe style="margin: 50px 5% 0px 5%; border-radius: 10px; box-shadow: 0px 0px 20px rgb(190, 190, 190);" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.288139789301!2d-75.49779878601201!3d6.356736426844999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e44253b08258a27%3A0x9cada5916a9d8fe9!2sPreescolar%20Mundo%20De%20Juegos!5e0!3m2!1ses!2sco!4v1601956494573!5m2!1ses!2sco" width="90%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+</div>
+
+<div style="width: 100%; position: relative; margin: 0px 0px 50px 0px;">
+    <div class="space" style="height: 50px;"></div>
+    <div class="textBlock">
+        <p class="textForBlock">Copacabana,<br>Calle 49 No 26-100<br>Barrio San Juan de la Tasajera</p>
+    </div>
+    <p class="subtitle" style="position: absolute; left: 8%; color: rgb(242, 252, 105); text-shadow: 2px 2px 0px rgb(138, 146, 26); top: 0px;">Dirección</p>
+</div>
+
+</section>
+
+{% include "footer.html" %}
+
+</html>

@@ -1,0 +1,68 @@
+<link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+
+<style>
+
+/* Selectors */
+.menuButtonText:hover {
+    color: rgb(252, 244, 174);
+    text-shadow: 2px 2px 0px rgb(128, 115, 0);
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+/* Clases */
+.stickyMenu {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 80px;
+    margin: 0px;
+    z-index: 5;
+    background-color: #49e4ff;
+    border-bottom-right-radius: 30%;
+    border-bottom-left-radius: 30%;
+}
+.menuCont {
+    position: relative;
+    margin: 0px;
+    background-color: #49e4ff;
+    width: 90%;
+    height: 80px;
+    margin: 0px 5%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgb(190, 190, 190);
+    z-index: 5;
+}
+.menuButton {
+    position: absolute;
+    display: table;
+    height: 100%;
+}
+.menuButtonText {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    font-size:30px;
+    font-family: 'Kalam', cursive;
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 0px rgba(0, 160, 189, 1);
+    user-select: none;
+}
+
+</style>
+
+<html>
+
+<div class="menuCont">
+
+    <div id="inicio" class="menuButton" style="left: 20px; width: 120px;"><p class="menuButtonText">Inicio</p></div>
+    <div id="contacto" class="menuButton" style="right: 20px; width: 200px;"><p class="menuButtonText">Contáctanos</p></div>
+    <div id="ubicacion" class="menuButton" style="right: 220px; width: 180px;"><p class="menuButtonText">Ubicación</p></div>
+    <div id="avisosButton" class="menuButton" style="right: 400px; width: 120px;"><p class="menuButtonText">Avisos</p></div>
+    <div id="about" class="menuButton" style="right: 520px; width: 240px;"><p class="menuButtonText">Quiénes somos</p></div>
+
+</div>
+
+</html>
