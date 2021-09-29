@@ -1,6 +1,6 @@
 <html>
 
-<form id="redirect" action="editarAvisos" method="POST">{% csrf_token %}</form>
+<form id="redirect" action="/editarAvisos/" method="POST">{% csrf_token %}</form>
 
 <script>
     document.getElementById("redirect").submit()
