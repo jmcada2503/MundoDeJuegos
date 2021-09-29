@@ -1,0 +1,167 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+{% load static %}
+
+<script>
+
+const img = 7
+imagenActual = 1
+
+function changeImage(side) {
+
+    $("#botonDerecho").off("click")
+    $("#botonIzquierdo").off("click")
+
+    if (side == "right") {
+
+        imagenActual += 1
+        if (imagenActual > img) {
+            imagenActual = 1
+        }
+
+        aux = "url(/static/ImgCarrusel/img".concat(imagenActual);
+        aux = aux.concat(".jpeg)");
+
+        document.getElementById("secondPicture").style.backgroundImage = aux;
+
+        $("#secondPicture").css({
+            left: "10%"
+        })
+        $("#mainPicture").animate({
+            width: "0%",
+            left: "90%"
+        }, 1000)
+        $("#secondPicture").animate({
+            width: "80%"
+        }, 1000, function() {
+            $("#botonDerecho").on("click", function() {changeImage("right")})
+            $("#botonIzquierdo").on("click", function() {changeImage("left")})
+        })
+
+        aux = document.getElementById("secondPicture")
+        document.getElementById("mainPicture").id = "secondPicture"
+        aux.id = "mainPicture"
+    }
+    else if (side == "left") {
+
+        imagenActual -= 1
+        if (imagenActual < 1) {
+            imagenActual = img
+        }
+
+        aux = "url(/static/ImgCarrusel/img".concat(imagenActual);
+        aux = aux.concat(".jpeg)");
+
+        document.getElementById("secondPicture").style.backgroundImage = aux;
+
+        $("#secondPicture").css({
+            left: "90%",
+        })
+        $("#mainPicture").animate({
+            width: "0%"
+        }, 1000)
+        $("#secondPicture").animate({
+            width: "80%",
+            left: "10%"
+        }, 1000, function() {
+            $("#botonDerecho").on("click", function() {changeImage("right")})
+            $("#botonIzquierdo").on("click", function() {changeImage("left")})
+        })
+
+        aux = document.getElementById("secondPicture")
+        document.getElementById("mainPicture").id = "secondPicture"
+        aux.id = "mainPicture"
+    }
+}
+
+$(document).ready(function() {
+
+    //Set img size
+    $("#mainPicture").css({
+        backgroundImage: "url({% static 'ImgCarrusel/img1.jpeg' %})",
+        backgroundSize: $("#mainPicture").width().toString()+"px "+$("#mainPicture").width().toString()+"px"
+    })
+    $("#secondPicture").css({
+        backgroundSize: $("#mainPicture").width().toString()+"px "+$("#mainPicture").width().toString()+"px"
+    })
+
+    //Right button click
+    $("#botonDerecho").on("click", function() {
+        changeImage("right")
+    })
+
+    //Left button click
+    $("#botonIzquierdo").on("click", function() {
+        changeImage("left")
+    })
+
+})
+
+</script>
+
+<style>
+
+.carrButton:hover {
+    color: black;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#mainPicture {
+    position: absolute;
+    height: 500px;
+    width: 80%;
+    left: 10%;
+    background-attachment: scroll;
+    background-position: top;
+    border-radius: 10px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+#secondPicture {
+    width: 0%;
+    height: 500px;
+    position: absolute;
+    background-attachment: scroll;
+    background-position: top;
+    left: 10%;
+    border-radius: 10px;
+    background-size: auto;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+.carrButton {
+    position: absolute;
+    font-family: 'Kalam', cursive;
+    color: rgb(107, 107, 107);
+    font-size: 100px;
+    user-select: none;
+}
+
+#whiteCurtain {
+    position: absolute;
+    height: 500px;
+    width: 80%;
+    left: 10%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgb(190, 190, 190);
+}
+
+</style>
+
+<html>
+
+<div style="width: 100%; position: relative; margin: 0px; height: 500px;">
+
+    <div id="secondPicture"></div>
+
+    <div id="mainPicture"></div>
+
+    <div id="whiteCurtain"></div>
+
+    <p class="carrButton" id="botonIzquierdo" style="top: 80px; right: 92%;"><</p>
+    <p class="carrButton" id="botonDerecho" style="top: 80px; left: 92%;">></p>
+
+</div>
+
+</html>

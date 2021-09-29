@@ -1,0 +1,68 @@
+
+{% load static %}
+
+<style>
+
+    #phoneMenu {
+        position: fixed;
+        width: 100%;
+        left: -100%;
+        height: 100%;
+        background-color: rgba(0, 217, 255, 0.8);
+        z-index: 4;
+        top: 0px;
+        text-align: center;
+        display: table;
+    }
+    #menuImg {
+        position: relative;
+        height: 50px;
+        width: 50px;
+        padding: 140px 0px 0px 40px;
+    }
+    #menuImgCont {
+        position: fixed;
+        height: 240px;
+        width: 240px;
+        border: 0px solid;
+        border-radius: 100px;
+        right: -120px;
+        top: -120px;
+        background-color: rgb(94, 255, 201);
+        z-index: 5;
+        opacity: 70%;
+        box-shadow: -10px 10px 20px rgb(172, 172, 172);
+    }
+    .phoneMenuButton {
+        position: relative;
+        display: table;
+        margin: 10px auto;
+    }
+    #buttonsCont {
+        position: relative;
+        margin: auto;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+</style>
+
+<html>
+
+    <section id="pmenu" style="visibility: hidden;">
+        <div id="menuImgCont" onclick="openMenu()">
+            <img src="{% static 'Img/menu.png' %}" alt="menu" id="menuImg">
+        </div>
+
+        <div id="phoneMenu">
+            <div id="buttonsCont">
+                <div id="inicio" class="phoneMenuButton"><p class="menuButtonText">Inicio</p></div>
+                <div id="contacto" class="phoneMenuButton"><p class="menuButtonText">Contáctanos</p></div>
+                <div id="ubicacion" class="phoneMenuButton"><p class="menuButtonText">Ubicación</p></div>
+                <div id="avisosButton" class="phoneMenuButton"><p class="menuButtonText">Avisos</p></div>
+                <div id="about" class="phoneMenuButton"><p class="menuButtonText">Quiénes somos</p></div>
+            </div>
+        </div>
+    </section>
+
+</html>
