@@ -4,7 +4,7 @@
 
 <script>
 
-const img = 7
+const img = 11
 imagenActual = 1
 
 function changeImage(side) {
@@ -51,8 +51,7 @@ function changeImage(side) {
 
         aux = "url(/static/ImgCarrusel/img".concat(imagenActual);
         aux = aux.concat(".jpeg)");
-
-        document.getElementById("secondPicture").style.backgroundImage = aux;
+document.getElementById("secondPicture").style.backgroundImage = aux;
 
         $("#secondPicture").css({
             left: "90%",
